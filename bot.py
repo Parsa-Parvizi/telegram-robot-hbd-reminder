@@ -1,7 +1,10 @@
-from datetime import datetime, timedelta
+from telegram import Update
+from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
 
-def send_birthday_reminders():
-    tomorrow = datetime.now().date() + timedelta(days=1)
-    birthdays = get_birthdays_for_date(tomorrow)
-    for b in birthdays:
-        send_telegram_message(b.user.telegram_id, f"فردا تولد {b.friend_name} هست! 🎉")
+async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    await update.message.reply_text("سلام! ربات یادآور تولد فعاله 🎉")
+
+app = ApplicationBuilder().token("توکن ربات تلگرامت").build()
+app.add_handler(CommandHandler("start", start))
+
+app.run_polling()
