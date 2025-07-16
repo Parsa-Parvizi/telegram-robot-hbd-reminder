@@ -50,7 +50,6 @@ async def get_date(update: Update, context: ContextTypes.DEFAULT_TYPE):
     name = context.user_data["name"]
     birth_date = update.message.text
     try:
-        # تست فرمت تاریخ
         from datetime import datetime
         datetime.strptime(birth_date, "%Y-%m-%d")
         add_birthday(update.effective_user.id, name, birth_date)
